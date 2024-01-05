@@ -1,0 +1,58 @@
+notes on notes: under each heading is what I did from log-in as the previous bandit
+to successful login as current bandit
+
+bandit 0:
+ssh -p 2220 bandit0@bandit.labs.overthewire.org
+bandit 0
+
+bandit 1:
+ssh -p 2220 bandit1@bandit.labs.overthewire.org
+NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
+
+bandit 2:
+cat ./-
+ssh -p 2220 bandit2@bandit.labs.overthewire.org
+rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
+
+bandit 3:
+cat spaces\ in\ this\ filename 
+ssh -p 2220 bandit3@bandit.labs.overthewire.org
+aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
+
+bandit 4:
+ls inhere/ -a
+cat inhere/.hidden
+ssh -p 2220 bandit4@bandit.labs.overthewire.org
+2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
+
+bandit 5:
+brute forced it (cat-ed evey in ./-file0_ until -file07)
+ssh -p 2220 bandit5@bandit.labs.overthewire.org
+lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
+
+bandit 6:
+cd inhere/
+find -size 1033c
+cat ./maybehere07/.file2
+ssh -p 2220 bandit6@bandit.labs.overthewire.org
+P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
+
+bandit 7:
+(googled to get the 2>/dev/null and /)
+bandit6@bandit:~$ find / -group bandit6 -user bandit7 -size 33c 2>/dev/null
+bandit6@bandit:~$ cat /var/lib/dpkg/info/bandit7.password
+
+z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
+
+bandit8:
+bandit7@bandit:~$ grep -E "*millionth*" data.txt 
+
+TESKZC0XvTetK0S9xNwm25STk5iWrBvP
+
+bandit 9:
+bandit8@bandit:~$ sort data.txt | uniq -u
+EN632PlfYiZbn3PhVK3XOGSlNInNE00t
+
+bandit 10:
+bandit9@bandit:~$ strings data.txt | grep =
+G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
