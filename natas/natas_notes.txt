@@ -1,0 +1,47 @@
+The text under a heading describes the process of getting the password for that level (while logged in as the previous user)
+
+To start, I opened up firefox on my kali vm and proceeded to natas 0 webpage
+
+## natas 0
+http://natas0.natas.labs.overthewire.org/
+username, password: natas0, natas0
+
+## natas 1
+opened up the webpage inspector and found natas1 password in an html content: g9D9cREhslqBKtcA2uocGHPfMZVzeFK6
+http://natas1.natas.labs.overthewire.org/
+
+## natas2
+The page comment said "right clicking has been blocked" (presumably to prevent me from opening up the browser inspector feature, but I managed to right click just fine and fetch the password for the next level: h4ubbcXrWqsTo7GGnnUMLppXbOogfBZ7
+I felt a bit bad about circumventing their challenge, so I also got the password through spinning up wireshark and capturing packets from http://natas1.natas.labs.overthewire.org/ (I got its IP address by running curl), which got me the packet with the raw html with the above password in it. (solution without right clicking)
+
+## natas3
+navigated to http://natas2.natas.labs.overthewire.org/files/ and clicked on "users.txt" to get the natas3 password: G6ctbMJ5Nb4cbFwhpMPSvxGHhQ7I6W8Q
+
+## natas4
+navigated to http://natas3.natas.labs.overthewire.org/robots.txt, which led me to the directory http://natas3.natas.labs.overthewire.org/s3cr3t/ with a users.txt and natas4 password:
+tKOcJIbzM4lTs8hbCmzn5Zr4434fGZQm
+
+## natas5
+I get the message that I have to be logged in already (essentially) to log in. Can I set my source to something? The term for what I want to change is the "referer" in the http packet. I used this firefox extension: https://addons.mozilla.org/en-US/firefox/addon/togglereferrer/ Didn't work, because it was setting my referer to an empty string-it didn't seem to let me set my own referer. I tried this other one: https://addons.mozilla.org/en-US/firefox/addon/referer-modifier/
+I set my target domain to be: natas4.natas.labs.overthewire.org
+origin domain: 
+(blank, so any)
+replacement: http://natas5.natas.labs.overthewire.org/
+password found: Z0NsrtIkJoKALBCLi5eqFfcRN82Au2oD
+
+## natas6
+This time, looking at the html header captured in wireshark, it seems that there's a "Set-Cookie: loggedin=0\r\n" field...is there a firefox extension which can make that always true? Google gives me: https://addons.mozilla.org/en-US/firefox/addon/cookie-editor/ which I downloaded. I added a cookie called "loggedin" which I set to 1 and got acess.
+pwd: fOIvE0MDtPTgRhqmmvvAOt2EfXR6uQgR
+
+## natas7
+Some sort of injection--something with PHP posting? Nope, just redirect to the includes and check the html to find a comment with the value of secret. Submitting secret gets us the password for natas7
+
+## natas8
+inspecting the page gets me a comment saying that natas8 pwd is in etc/natas_webpass/natas8; setting page=that (in the url) got me the password
+
+## natas9
+to decode the encoded secret, I want to hextobin (turn from hex back to ascii), rev, base64decode
+I did this with an online hex-string converted, and then bash rev and base64 -d. Entering the decoded string got me the password
+
+## natas10
+I can do 'needle; <some other bash command>'!
